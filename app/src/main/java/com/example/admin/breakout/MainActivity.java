@@ -19,7 +19,7 @@ import java.util.List;
 public class MainActivity extends Activity implements DrawFinishListener{
 
     /**
-     * ƒQ[ƒ€•`‰æView
+     * ã‚²ãƒ¼ãƒ æç”»View
      */
     private BreakoutView view;
 
@@ -98,9 +98,9 @@ public class MainActivity extends Activity implements DrawFinishListener{
     private SensorManager sensorManager;
     private MoveListener moveListener;
     private List<Sensor> sensorList;
-    /**ƒZƒ“ƒT[‘¬ŠÔ(ƒtƒŒ[ƒ€)*/
+    /**ã‚»ãƒ³ã‚µãƒ¼æ™‚é€Ÿæ™‚é–“(ãƒ•ãƒ¬ãƒ¼ãƒ )*/
     private int sensorTime = 500;
-    /**ƒZƒ“ƒT[‘±Œv‘ªƒJƒEƒ“ƒ^*/
+    /**ã‚»ãƒ³ã‚µãƒ¼æŒç¶šè¨ˆæ¸¬ã‚«ã‚¦ãƒ³ã‚¿*/
     private int sensorCount = 0;
     /**flag of on sensor*/
     private Boolean sensorFlag;
@@ -108,7 +108,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
     WindowManager wm;
     Display dp;
 
-    /**ƒQ[ƒ€‚Ìó‘Ô*/
+    /**ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹*/
     public enum Type {
         NORMAL,
         ADD_BALL,
@@ -116,7 +116,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
         GAME_OVER,
         GAME_CLEAR
     }
-    /**Œ»İ‚ÌƒQ[ƒ€‚Ìó‘Ô*/
+    /**ç¾åœ¨ã®ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹*/
     private Type state;
 
     @Override
@@ -126,24 +126,24 @@ public class MainActivity extends Activity implements DrawFinishListener{
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        //ƒEƒBƒ“ƒhƒE‚ÉŠÖ‚·‚éƒT[ƒrƒX‚ğæ“¾‚·‚é
+        //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã«é–¢ã™ã‚‹ã‚µãƒ¼ãƒ“ã‚¹ã‚’å–å¾—ã™ã‚‹
         wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-        //ƒfƒBƒXƒvƒŒƒC‚Ìî•ñ‚ğ“¾‚é
+        //ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã®æƒ…å ±ã‚’å¾—ã‚‹
         dp = wm.getDefaultDisplay();
 
-        //‰Šú‰»
+        //åˆæœŸåŒ–
         initBall();
         initBar();
         initBlock();
         state = Type.NORMAL;
 
-        //ƒZƒ“ƒT[‚Ìİ’è
+        //ã‚»ãƒ³ã‚µãƒ¼ã®è¨­å®š
         sensorManager = (SensorManager) this.getSystemService(this.SENSOR_SERVICE);
         moveListener = new MoveListener(balls);
         sensorList = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
         sensorFlag = false;
 
-        //view‚Ì¶¬A‰Šú‰»
+        //viewã®ç”Ÿæˆã€åˆæœŸåŒ–
         view = new BreakoutView(this, blocks, balls, bar);
         view.setDrawFinishListener(this);
         view.setSensorFlag(sensorFlag);
@@ -156,7 +156,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     return true;
                 }
                 view.invalidate();
-                // ‰æ–Ê‚ğƒ^ƒbƒ`‚µ‚½
+                // ç”»é¢ã‚’ã‚¿ãƒƒãƒã—ãŸæ™‚
                 if (e.getAction() == MotionEvent.ACTION_DOWN) {
 //                    bar.refreshX(e.getX());
                     if (gameOverFlag || gameClearFlag) {
@@ -165,14 +165,14 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     }
                     return true;
                 }
-                // ƒ^ƒbƒ`‚µ‚Ä‚¢‚éŠÔ
+                // ã‚¿ãƒƒãƒã—ã¦ã„ã‚‹é–“
                 if (e.getAction() == MotionEvent.ACTION_MOVE) {
                     if (e.getX() >= bar.getX() - bar.getBARMARGIN() && e.getX() <= bar.getX() + bar.getWIDTH() + bar.getBARMARGIN()) {
                         bar.refreshX((int) e.getX());
                     }
                     return true;
                 }
-                // w‚ğƒ^ƒbƒ`‚µ‚½ó‘Ô‚©‚ç—£‚µ‚½
+                // æŒ‡ã‚’ã‚¿ãƒƒãƒã—ãŸçŠ¶æ…‹ã‹ã‚‰é›¢ã—ãŸæ™‚
                 if (e.getAction() == MotionEvent.ACTION_UP) {
                 }
                 return false;
@@ -182,8 +182,8 @@ public class MainActivity extends Activity implements DrawFinishListener{
     }
 
     /**
-     * Õ“Ë”»’è
-     * Õ“Ë‚µ‚½‚ç‘¬“x‚ğ”½“]‚µAÀ•W‚ğC³
+     * è¡çªåˆ¤å®š
+     * è¡çªã—ãŸã‚‰é€Ÿåº¦ã‚’åè»¢ã—ã€åº§æ¨™ã‚’ä¿®æ­£
      *
      * @param ball
      * @param bar
@@ -195,31 +195,31 @@ public class MainActivity extends Activity implements DrawFinishListener{
      */
     public void bounce(MyBall ball, MyBar bar, int view_width, int view_height, MyBlock[][] bls, boolean sensorFlag) {
         state = Type.NORMAL;
-        //¶’[•Ç
+        //å·¦ç«¯å£
         if (ball.getX() - ball.getR() <= 0) {
             ball.setX(ball.getR());
             ball.setDx(-ball.getDx() * ball.getE());
         }
-        //‰E’[•Ç
+        //å³ç«¯å£
         else if (ball.getX() + ball.getR() >= view_width) {
             ball.setX(view_width - ball.getR());
             ball.setDx(-ball.getDx() * ball.getE());
         }
-        //ã’[•Ç
+        //ä¸Šç«¯å£
         if (ball.getY() - ball.getR() <= 0) {
             ball.setY(ball.getR());
             ball.setDy(-ball.getDy() * ball.getE());
         }
-        //‰º’[•Ç
+        //ä¸‹ç«¯å£
         else if (ball.getY() + ball.getR() >= view_height) {
             state = Type.GAME_OVER;
 //            y = height - r;
 //            dy = -dy;
 //            res = -1;
         }
-        //‰Á‘¬“xƒZƒ“ƒT[ON‚ÍAƒo[”ñ•\¦‚Ì‚½‚ßA•sŠ±Â
+        //åŠ é€Ÿåº¦ã‚»ãƒ³ã‚µãƒ¼ONæ™‚ã¯ã€ãƒãƒ¼éè¡¨ç¤ºã®ãŸã‚ã€ä¸å¹²æ¸‰
         if (!sensorFlag) {
-            //ƒo[
+            //ãƒãƒ¼
             if (ball.getX() <= bar.getX() + bar.getWIDTH() && ball.getX() >= bar.getX() && ball.getY() + ball.getR() >= bar.getY() && ball.getY() + ball.getR() <= bar.getY() + bar.getHEIGHT()) {
                 ball.setY(bar.getY() - ball.getR());
                 ball.setDx(ball.getDx() + bar.getDx() / 10.0);
@@ -228,24 +228,24 @@ public class MainActivity extends Activity implements DrawFinishListener{
         }
 
         //block
-        /**ƒuƒƒbƒN‚ÌÀ•W*/
+        /**ãƒ–ãƒ­ãƒƒã‚¯ã®åº§æ¨™*/
         int block_x;
         int block_y;
-        /**ƒuƒƒbƒN‚Ì‘å‚«‚³*/
+        /**ãƒ–ãƒ­ãƒƒã‚¯ã®å¤§ãã•*/
         int block_w;
         int block_h;
-        /**ƒuƒƒbƒN‚Æƒ{[ƒ‹‚Ì‹——£*/
+        /**ãƒ–ãƒ­ãƒƒã‚¯ã¨ãƒœãƒ¼ãƒ«ã®è·é›¢*/
         double dist_x;
         double dist_y;
-        /**ƒuƒƒbƒN‚Ìc‰¡”ä*/
+        /**ãƒ–ãƒ­ãƒƒã‚¯ã®ç¸¦æ¨ªæ¯”*/
         double aspect_ratio;
-        /**ƒuƒƒbƒN‚ğ”j‰ó‚µ‚½‚©‚Ç‚¤‚©*/
+        /**ãƒ–ãƒ­ãƒƒã‚¯ã‚’ç ´å£Šã—ãŸã‹ã©ã†ã‹*/
         boolean breakFlag = false;
-        /**ƒQ[ƒ€‚ğƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©*/
+        /**ã‚²ãƒ¼ãƒ ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹*/
         boolean clearFlag = true;
         for (int i = 0; i < bls.length; i++) {
             for (int j = 0; j < bls[i].length; j++) {
-                //ƒuƒƒbƒN‚ª‚ ‚é‚È‚ç
+                //ãƒ–ãƒ­ãƒƒã‚¯ãŒã‚ã‚‹ãªã‚‰
                 if (bls[i][j].getLife() > 0) {
                     clearFlag = false;
                     block_x = bls[i][j].getX();
@@ -255,10 +255,10 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     //distance block from ball
                     dist_x = (block_x + (block_w / 2)) - ball.getX();
                     dist_y = (block_y + (block_h / 2)) - ball.getY();
-                    //ƒuƒƒbƒN‚Ìc‰¡”ä
+                    //ãƒ–ãƒ­ãƒƒã‚¯ã®ç¸¦æ¨ªæ¯”
                     aspect_ratio = bls[i][j].getBlock_aspect_ratio();
 
-                    //ƒ{[ƒ‹‚ÆƒuƒƒbƒN‚ÌˆÊ’uŠÖŒW‚Å4•ªŠ„
+                    //ãƒœãƒ¼ãƒ«ã¨ãƒ–ãƒ­ãƒƒã‚¯ã®ä½ç½®é–¢ä¿‚ã§4åˆ†å‰²
                     //judge top or bottom
                     if (dist_y >= 0 && Math.abs(dist_x) * aspect_ratio <= dist_y) {
                         //top
@@ -309,7 +309,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     }
                 }
                 if (breakFlag) {
-                    //ƒAƒCƒeƒ€ƒuƒƒbƒN‚¾‚Á‚½‚È‚ç
+                    //ã‚¢ã‚¤ãƒ†ãƒ ãƒ–ãƒ­ãƒƒã‚¯ã ã£ãŸãªã‚‰
                     if (bls[i][j].getItem() != Type.NORMAL) {
                         state = bls[i][j].getItem();
                     }
@@ -327,7 +327,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
 
 
     /**
-     * ƒuƒƒbƒN‰º•”‚Æ‚ÌÕ“Ë”»’è
+     * ãƒ–ãƒ­ãƒƒã‚¯ä¸‹éƒ¨ã¨ã®è¡çªåˆ¤å®š
      *
      * @param ball_x
      * @param ball_y
@@ -346,7 +346,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
     }
 
     /**
-     * ƒuƒƒbƒNã•”‚Æ‚ÌÕ“Ë”»’è
+     * ãƒ–ãƒ­ãƒƒã‚¯ä¸Šéƒ¨ã¨ã®è¡çªåˆ¤å®š
      *
      * @param ball_x
      * @param ball_y
@@ -365,7 +365,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
     }
 
     /**
-     * ƒuƒƒbƒN¶•”‚Æ‚ÌÕ“Ë”»’è
+     * ãƒ–ãƒ­ãƒƒã‚¯å·¦éƒ¨ã¨ã®è¡çªåˆ¤å®š
      *
      * @param ball_x
      * @param ball_y
@@ -384,7 +384,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
     }
 
     /**
-     * ƒuƒƒbƒN‰E•”‚Æ‚ÌÕ“Ë”»’è
+     * ãƒ–ãƒ­ãƒƒã‚¯å³éƒ¨ã¨ã®è¡çªåˆ¤å®š
      *
      * @param ball_x
      * @param ball_y
@@ -409,7 +409,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
         for (Sensor sensor : sensorList) {
             sensorManager.registerListener(moveListener, sensor, SensorManager.SENSOR_DELAY_FASTEST);
         }
-        //”½”­ŒW”‚ğİ’è
+        //åç™ºä¿‚æ•°ã‚’è¨­å®š
         for (int i = 0; i < balls.size(); i++) {
             balls.get(i).setE(0.5);
         }
@@ -420,7 +420,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
      */
     void sleepSensor() {
         sensorManager.unregisterListener(moveListener);
-        //”½”­ŒW”‚ğİ’è
+        //åç™ºä¿‚æ•°ã‚’è¨­å®š
         for (int i = 0; i < balls.size(); i++) {
             balls.get(i).setE(1);
         }
@@ -443,10 +443,10 @@ public class MainActivity extends Activity implements DrawFinishListener{
         /**indices of item blocks*/
         int[] itemIndices = new int[numOfItem];
         int indexCount = 0;
-        /**”½”­ŒW”*/
+        /**åç™ºä¿‚æ•°*/
         double e = 1.0001;
 
-        //ƒAƒCƒeƒ€Œø‰Ê‚ğ•t—^‚·‚éƒuƒƒbƒN”Ô†‚ğ’Š‘I
+        //ã‚¢ã‚¤ãƒ†ãƒ åŠ¹æœã‚’ä»˜ä¸ã™ã‚‹ãƒ–ãƒ­ãƒƒã‚¯ç•ªå·ã‚’æŠ½é¸
         for (int i = 0; i < itemIndices.length; i++) {
             itemIndices[i] = (int) (Math.random() * (BLOCK_NUM_X * BLOCK_NUM_Y));
         }
@@ -505,19 +505,19 @@ public class MainActivity extends Activity implements DrawFinishListener{
      */
     public int[][] initBlockColors() {
         int[][] res = new int[4][3];
-        //ƒAƒCƒeƒ€ƒuƒƒbƒN
+        //ã‚¢ã‚¤ãƒ†ãƒ ãƒ–ãƒ­ãƒƒã‚¯
         res[3][0] = 255;
         res[3][1] = 255;
         res[3][2] = 255;
-        //‘Ï‹v3ƒuƒƒbƒN
+        //è€ä¹…3ãƒ–ãƒ­ãƒƒã‚¯
         res[2][0] = 0;
         res[2][1] = 128;
         res[2][2] = 255;
-        //‘Ï‹v2ƒuƒƒbƒN
+        //è€ä¹…2ãƒ–ãƒ­ãƒƒã‚¯
         res[1][0] = 255;
         res[1][1] = 255;
         res[1][2] = 0;
-        //‘Ï‹v1ƒuƒƒbƒN
+        //è€ä¹…1ãƒ–ãƒ­ãƒƒã‚¯
         res[0][0] = 255;
         res[0][1] = 0;
         res[0][2] = 0;
@@ -533,15 +533,15 @@ public class MainActivity extends Activity implements DrawFinishListener{
 
     @Override
     public void onDrawFinished() {
-        //‰Á‘¬“xƒZƒ“ƒT[ON
+        //åŠ é€Ÿåº¦ã‚»ãƒ³ã‚µãƒ¼ONæ™‚
         if (sensorFlag) {
             sensorCount++;
-            //ˆê’èŠÔ‚½‚Á‚½‚çƒZƒ“ƒT[’â~
+            //ä¸€å®šæ™‚é–“ãŸã£ãŸã‚‰ã‚»ãƒ³ã‚µãƒ¼åœæ­¢
             if (sensorCount > sensorTime) {
                 sleepSensor();
                 sensorFlag = false;
                 view.setSensorFlag(sensorFlag);
-                //ƒZƒ“ƒT[’â~Œãƒ{[ƒ‹‚Ì‘¬“x‚ğƒ‰ƒ“ƒ_ƒ€‚Å•t—^
+                //ã‚»ãƒ³ã‚µãƒ¼åœæ­¢å¾Œãƒœãƒ¼ãƒ«ã®é€Ÿåº¦ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§ä»˜ä¸
                 for (int i = 0; i < balls.size(); i++) {
                     if ((int) (Math.random() * 2) == 0) {
                         balls.get(i).setDx(RESTART_BALL_SPEED);
@@ -553,15 +553,15 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     } else {
                         balls.get(i).setDy(-RESTART_BALL_SPEED);
                     }
-                    //‰Á‘¬“x‚Í0‚É
+                    //åŠ é€Ÿåº¦ã¯0ã«
                     balls.get(i).changeAcceleration(0, 0);
                 }
             }
         }
-        //Õ“Ë”»’è
+        //è¡çªåˆ¤å®š
         for (int i = 0; i < balls.size(); i++) {
             bounce(balls.get(i), bar, dp.getWidth(), dp.getHeight(), blocks, sensorFlag);
-            //ƒAƒCƒeƒ€FƒZƒ“ƒT[
+            //ã‚¢ã‚¤ãƒ†ãƒ ï¼šã‚»ãƒ³ã‚µãƒ¼
             if (state == Type.ON_ACCELERATION) {
                 if (!sensorFlag) {
                     runSensor();
@@ -571,11 +571,11 @@ public class MainActivity extends Activity implements DrawFinishListener{
                 } else {
                     sensorCount = 0;
                 }
-                //ƒAƒCƒeƒ€Fƒ{[ƒ‹‘‰Á
+                //ã‚¢ã‚¤ãƒ†ãƒ ï¼šãƒœãƒ¼ãƒ«å¢—åŠ 
             } else if (state == Type.ADD_BALL) {
                 balls.add(new MyBall(balls.get(i).getX(), balls.get(i).getY(), BALL_RADIUS, balls.get(i).getDx() + (Math.random() * 3) + 1, balls.get(i).getDy() + (Math.random() * 3) + 1, BALL_R, BALL_G, BALL_B));
                 balls.add(new MyBall(balls.get(i).getX(), balls.get(i).getY(), BALL_RADIUS, balls.get(i).getDx() + (Math.random() * 3) + 1, balls.get(i).getDy() + (Math.random() * 3) + 1, BALL_R, BALL_G, BALL_B));
-                //ƒQ[ƒ€ƒI[ƒo[
+                //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
             } else if (state == Type.GAME_OVER) {
                 balls.remove(i);
                 if (balls.size() == 0) {
@@ -583,7 +583,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
                     view.setGameOverFlag(gameOverFlag);
                     break;
                 }
-                //ƒQ[ƒ€ƒNƒŠƒA
+                //ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
             } else if (state == Type.GAME_CLEAR) {
                 gameClearFlag = true;
                 view.setGameClearFlag(gameClearFlag);
@@ -591,7 +591,7 @@ public class MainActivity extends Activity implements DrawFinishListener{
             }
         }
 
-        //À•W‚ÌXV
+        //åº§æ¨™ã®æ›´æ–°
         for (int i = 0; i < balls.size(); i++) {
             balls.get(i).addX();
             balls.get(i).addY();
